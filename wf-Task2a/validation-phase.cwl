@@ -29,7 +29,7 @@ inputs:
   pattern:
     label: Regex pattern for valid SubjectIDs
     type: string
-    default: "BraTSPath_Val.*png$" --> needs update for .nii.gz files now
+    default: "BraTSPath_Val.*nii.gz$"
 
 outputs: []
 
@@ -72,14 +72,14 @@ steps:
       https://raw.githubusercontent.com/Sage-Bionetworks-Workflows/cwl-tool-synapseclient/v1.4/cwl/synapse-get-tool.cwl
     in:
       - id: synapseid
-        valueFrom: "syn68152189" --> needs update
+        valueFrom: "syn68236054"
       - id: synapse_config
         source: "#synapseConfig"
     out:
       - id: filepath
 
   validate:
-    doc: Validate submission, which should be a tar/zip of NIfTI files --> no updated needed here now
+    doc: Validate submission, which should be a tar/zip of NIfTI files
     run: steps/validate.cwl
     in:
       - id: input_file
