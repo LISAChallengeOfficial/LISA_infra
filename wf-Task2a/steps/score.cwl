@@ -32,7 +32,7 @@ outputs:
     outputEval: $(JSON.parse(self[0].contents)['submission_status'])
     loadContents: true
 
-baseCommand: Scores_Evaluation.py --> the Docker script
+baseCommand: Scores_Evaluation.py
 arguments:
 - prefix: -p
   valueFrom: $(inputs.input_file.path)
@@ -49,7 +49,7 @@ arguments:
 
 hints:
   DockerRequirement:
-    dockerPull: docker.synapse.org/syn53708126/pathology-evaluation:v2.0.0 --> needs update we want our docker on synapse
+    dockerPull: docker.synapse.org/syn53708126/pathology-evaluation:v2.0.0
 
 s:author:
 - class: s:Person
