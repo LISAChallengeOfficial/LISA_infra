@@ -152,7 +152,7 @@ steps:
 
   score:
     doc: Score submission
-    run: steps/score.cwl --> needs update; docker is called in this score.cwl script
+    run: steps/score2.cwl
     in:
       - id: input_file
         source: "#download_submission/filepath"
@@ -186,7 +186,7 @@ steps:
       #   default: []
     out: []
 
-  add_score_annots:  --> needs update for our table
+  add_score_annots:
     doc: >
       Update `submission_status` and add the scoring metric annotations
     run: |-
