@@ -158,12 +158,6 @@ steps:
         source: "#download_submission/filepath"
       - id: goldstandard
         source: "#download_goldstandard/filepath"
-      - id: gandlf_config
-        source: "#download_config/filepath"
-      - id: penalty_label
-        default: 9
-      - id: subject_id_pattern
-        source: "#pattern"
       - id: check_validation_finished
         source: "#check_validation_status/finished"
     out:
