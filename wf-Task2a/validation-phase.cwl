@@ -76,8 +76,7 @@ steps:
       - id: synapse_config
         source: "#synapseConfig"
     out:
-       filepath:
-         type: Directory 
+      - id: filepath 
 
   validate:
     doc: Validate submission, which should be a tar/zip of NIfTI files
@@ -160,6 +159,13 @@ steps:
     out:
       - id: unzipped
 
+  unzip_goldstandard:
+    run: steps/unzip.cwl
+    in:
+      - id: zipfile
+      source: "#download_goldstandard/filepath"
+    out: 
+      - id: unzipped
   score:
     doc: Score submission
     run: steps/score2.cwl
@@ -167,7 +173,7 @@ steps:
       segs:
         source: "#unzip_submission/unzipped"
       masks:
-        source: "#download_goldstandard/filepath"
+        source: "#unzip_goldstandard/unzipped"
       output_name:
         valueFrom: "/tmp/results.json"
     out:
