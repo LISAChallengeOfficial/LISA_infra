@@ -78,24 +78,7 @@ steps:
     out:
       - id: filepath 
 
-  validate:
-    doc: Validate submission, which should be a tar/zip of NIfTI files
-    run: steps/validate.cwl
-    in:
-      - id: input_file
-        source: "#download_submission/filepath"
-      - id: entity_type
-        source: "#download_submission/entity_type"
-      - id: subject_id_pattern
-        source: "#pattern"
-      - id: min_label
-        default: 0
-      - id: max_label
-        default: 8
-    out:
-      - id: results
-      - id: status
-      - id: invalid_reasons
+  
   
   send_validation_results:
     doc: Send email of the validation results to the submitter
