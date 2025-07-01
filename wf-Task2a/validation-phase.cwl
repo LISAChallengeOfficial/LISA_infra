@@ -78,60 +78,7 @@ steps:
     out:
       - id: filepath 
 
-  
-  
-  send_validation_results:
-    doc: Send email of the validation results to the submitter
-    run: |-
-      https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v4.1/cwl/validate_email.cwl
-    in:
-      - id: submissionid
-        source: "#submissionId"
-      - id: synapse_config
-        source: "#synapseConfig"
-      - id: status
-        source: "#validate/status"
-      - id: invalid_reasons
-        source: "#validate/invalid_reasons"
-      # OPTIONAL: set `default` to `false` if email notification about valid submission is needed
-      - id: errors_only
-        default: true
-    out: [finished]
 
-  add_validation_annots:
-    doc: >
-      Add `submission_status` and `submission_errors` annotations to the
-      submission
-    run: |-
-      https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v4.1/cwl/annotate_submission.cwl
-    in:
-      - id: submissionid
-        source: "#submissionId"
-      - id: annotation_values
-        source: "#validate/results"
-      - id: to_public
-        default: true
-      - id: force
-        default: true
-      - id: synapse_config
-        source: "#synapseConfig"
-    out: [finished]
-
-  check_validation_status:
-    doc: >
-      Check the validation status of the submission; if 'INVALID', throw an
-      exception to stop the workflow - this will prevent the attempt of
-      scoring invalid predictions file (which will then result in errors)
-    run: |-
-      https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v4.1/cwl/check_status.cwl
-    in:
-      - id: status
-        source: "#validate/status"
-      - id: previous_annotation_finished
-        source: "#add_validation_annots/finished"
-      - id: previous_email_finished
-        source: "#send_validation_results/finished"
-    out: [finished]
 
   unzip_submission:
     doc: Unzip submission zip file
