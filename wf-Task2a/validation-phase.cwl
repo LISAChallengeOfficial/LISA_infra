@@ -158,6 +158,8 @@ steps:
         source: "#download_submission/filepath"
       - id: goldstandard
         source: "#download_goldstandard/filepath"
+      - id: output_name
+        valueFrom: "/tmp/results.json"
     out:
       - id: results
       - id: status
