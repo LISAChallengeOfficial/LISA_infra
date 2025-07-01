@@ -150,12 +150,21 @@ steps:
         source: "#send_validation_results/finished"
     out: [finished]
 
+  unzip_submission:
+    doc: Unzip submission zip file
+    run: steps/unzip.cwl
+    in:
+      - id: zipfile
+        source: "#download_submission/filepath"
+    out:
+      - id: unzipped
+
   score:
     doc: Score submission
     run: steps/score2.cwl
     in:
       segs:
-        source: "#download_submission/filepath"
+        source: "#unzip_submission/unzipped"
       masks:
         source: "#download_goldstandard/filepath"
       output_name:
