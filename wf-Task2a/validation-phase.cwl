@@ -154,15 +154,15 @@ steps:
     doc: Score submission
     run: steps/score2.cwl
     in:
-      - id: input_file
+      segs:
         source: "#download_submission/filepath"
-      - id: goldstandard
+      masks:
         source: "#download_goldstandard/filepath"
-      - id: output_name
+      output_name:
         valueFrom: "/tmp/results.json"
     out:
       - id: results
-      - id: status
+
       
   send_score_results:
     doc: Send email of the scores to the submitter
