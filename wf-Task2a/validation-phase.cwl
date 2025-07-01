@@ -76,7 +76,8 @@ steps:
       - id: synapse_config
         source: "#synapseConfig"
     out:
-      - id: filepath
+       filepath:
+         type: Directory 
 
   validate:
     doc: Validate submission, which should be a tar/zip of NIfTI files
