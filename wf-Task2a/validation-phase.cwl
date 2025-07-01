@@ -163,7 +163,7 @@ steps:
     run: steps/unzip.cwl
     in:
       - id: zipfile
-      source: "#download_goldstandard/filepath"
+        source: "#download_goldstandard/filepath"
     out: 
       - id: unzipped
   score:
