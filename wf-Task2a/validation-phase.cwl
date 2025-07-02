@@ -125,7 +125,6 @@ steps:
         default: true
       - id: synapse_config
         source: "#synapseConfig"
-
     out: [finished]
 
 
