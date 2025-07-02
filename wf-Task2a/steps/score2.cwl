@@ -35,10 +35,10 @@ inputs:
       prefix: -o
 
 outputs:
-  results:
-    type: File
-    outputBinding:
-      glob: $(inputs.output_name)
+- id: results
+  type: File
+  outputBinding:
+    glob: results.json
 
 
 
