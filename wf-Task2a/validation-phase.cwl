@@ -80,7 +80,7 @@ steps:
 
   score:
     doc: Score submission
-    run: steps/score2.cwl
+    run: steps/score.cwl
     in:
       segs:
         source: "#download_submission/filepath"
