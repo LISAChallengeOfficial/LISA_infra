@@ -1,7 +1,7 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: Workflow
-label: LISA 2025 - Tasks 10 workflow
+label: LISA 2025 - Task2a
 
 requirements:
   - class: StepInputExpressionRequirement
