@@ -87,7 +87,7 @@ steps:
       masks:
         source: "#download_goldstandard/filepath"
       output_name:
-        valueFrom: "/tmp/results.json"
+        valueFrom: "results.json"
     out:
       - id: results
 
