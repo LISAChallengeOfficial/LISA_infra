@@ -109,7 +109,7 @@ steps:
     out: []
 
 
-   add_score_annots:
+  add_score_annots:
     doc: >
       Update `submission_status` and add the scoring metric annotations
     run: |-
