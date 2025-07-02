@@ -108,6 +108,23 @@ steps:
       #   default: []
     out: []
 
+  add_score_annots:
+    doc: >
+      Update `submission_status` and add the scoring metric annotations
+    run: |-
+      https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v4.1/cwl/annotate_submission.cwl
+    in:
+      - id: submissionid
+        source: "#submissionId"
+      - id: annotation_values
+        source: "#score/results"
+      - id: to_public
+        default: true
+      - id: force
+        default: true
+      - id: synapse_config
+        source: "#synapseConfig"
+    out: [finished]
   
  
 s:author:
