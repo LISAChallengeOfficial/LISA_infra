@@ -78,32 +78,14 @@ steps:
     out:
       - id: filepath 
 
-
-
-  unzip_submission:
-    doc: Unzip submission zip file
-    run: steps/unzip.cwl
-    in:
-      - id: zipfile
-        source: "#download_submission/filepath"
-    out:
-      - id: unzipped
-
-  unzip_goldstandard:
-    run: steps/unzip.cwl
-    in:
-      - id: zipfile
-        source: "#download_goldstandard/filepath"
-    out: 
-      - id: unzipped
   score:
     doc: Score submission
     run: steps/score2.cwl
     in:
       segs:
-        source: "#unzip_submission/unzipped"
+        source: "#download_submission/filepath"
       masks:
-        source: "#unzip_goldstandard/unzipped"
+        source: "#download_goldstandard/filepath"
       output_name:
         valueFrom: "/tmp/results.json"
     out:
@@ -131,8 +113,8 @@ steps:
 s:author:
 - class: s:Person
   s:identifier: https://orcid.org/0000-0002-5622-7998
-  s:email: verena.chung@sagebase.org
-  s:name: Verena Chung
+  s:email: difan@chla.usc.edu
+  s:name: Di Fan
 
 s:codeRepository: https://github.com/LISAChallengeOfficial/LISA_infra
 s:license: https://spdx.org/licenses/Apache-2.0
