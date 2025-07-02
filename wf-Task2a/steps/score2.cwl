@@ -17,13 +17,13 @@ inputs:
       position: 1
 
   segs:
-    type: Directory
+    type: File
     inputBinding:
       position: 2
       prefix: -p
 
   masks:
-    type: Directory
+    type: File
     inputBinding:
       position: 3
       prefix: -g
