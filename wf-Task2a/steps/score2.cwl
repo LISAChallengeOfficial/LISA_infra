@@ -43,7 +43,7 @@ outputs:
   type: string
   outputBinding:
     glob: results.json
-    outputEval: $(JSON.parse(self[0].contents)['status'])
+    outputEval: $(JSON.parse(self[0].contents)['submission_status'])
     loadContents: true
 
 
