@@ -12,17 +12,17 @@ requirements:
 inputs:
   task:
     type: string
-    default: --task2a
+    default: --task1
     inputBinding:
       position: 1
 
-  segs:
+  predict:
     type: File
     inputBinding:
       position: 2
       prefix: -p
 
-  masks:
+  gt:
     type: File
     inputBinding:
       position: 3
