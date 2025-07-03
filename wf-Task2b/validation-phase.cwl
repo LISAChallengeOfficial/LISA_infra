@@ -72,7 +72,7 @@ steps:
       https://raw.githubusercontent.com/Sage-Bionetworks-Workflows/cwl-tool-synapseclient/v1.4/cwl/synapse-get-tool.cwl
     in:
       - id: synapseid
-        valueFrom: "syn68573201"
+        valueFrom: "syn68574951"
       - id: synapse_config
         source: "#synapseConfig"
     out:
