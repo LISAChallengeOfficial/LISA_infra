@@ -16,13 +16,13 @@ inputs:
     inputBinding:
       position: 1
 
-  predict:
+  segs:
     type: File
     inputBinding:
       position: 2
       prefix: -p
 
-  gt:
+  masks:
     type: File
     inputBinding:
       position: 3
