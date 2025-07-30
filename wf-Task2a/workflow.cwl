@@ -224,9 +224,7 @@ steps:
       - id: entity_type
         source: "#get_docker_submission/entity_type"
     out:
-      - id: results
-      - id: status
-      - id: invalid_reasons
+      - id: found_files
   
   email_validation:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/validate_email.cwl
