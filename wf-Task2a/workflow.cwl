@@ -174,6 +174,7 @@ steps:
       # TODO: replace `valueFrom` with the absolute path to the data directory to be mounted
       - id: input_dir
         source: "#download_goldstandard/filepath"
+        valueFrom: $(self.path)
       - id: docker_script
         default:
           class: File
