@@ -219,7 +219,7 @@ steps:
   validate:
     run: steps/validate.cwl
     in:
-      - id: input_file
+      - id: input_dir
         source: "#run_docker/predictions"
       - id: entity_type
         source: "#get_docker_submission/entity_type"
