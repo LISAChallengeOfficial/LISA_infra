@@ -76,6 +76,8 @@ requirements:
             participantid = sub.userId
             name = syn.getUserProfile(participantid)['userName']
           evaluation = syn.getEvaluation(sub.evaluationId)
+
+          
           with open(args.results) as json_data:
             annots = json.load(json_data)
           if annots.get('submission_status') is None:
@@ -93,6 +95,7 @@ requirements:
                              "Your submission (id: %s) is scored, below are your results:\n\n" % sub.id,
                              "\n".join([i + " : " + str(annots[i]) for i in annots]),
                              "\n\nSincerely,\nChallenge Administrator"]
+
               syn.sendMessage(
                   userIds=[participantid],
                   messageSubject=subject,
