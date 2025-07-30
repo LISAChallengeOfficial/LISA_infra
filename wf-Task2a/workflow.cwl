@@ -89,7 +89,7 @@ steps:
     in:
       # TODO: replace `valueFrom` with the Synapse ID to the challenge goldstandard
       - id: synapseid
-        valueFrom: "syn68780015"
+        valueFrom: "syn68691971"
       - id: synapse_config
         source: "#synapseConfig"
     out:
@@ -173,7 +173,7 @@ steps:
         default: true
       # TODO: replace `valueFrom` with the absolute path to the data directory to be mounted
       - id: input_dir
-        valueFrom: "/tmp"
+        source: "#download_goldstandard/filepath"
       - id: docker_script
         default:
           class: File
