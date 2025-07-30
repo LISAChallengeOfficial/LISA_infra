@@ -41,7 +41,7 @@ arguments:
     prefix: -s
   - valueFrom: $(inputs.synapse_config.path)
     prefix: -c
-  - valueFrom: $(inputs.results)
+  - valueFrom: $(inputs.results.path)
     prefix: -r
   - valueFrom: $(inputs.private_annotations)
     prefix: -p
