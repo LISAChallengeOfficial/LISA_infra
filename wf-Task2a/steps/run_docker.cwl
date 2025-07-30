@@ -60,7 +60,7 @@ requirements:
 
 outputs:
   predictions:
-    type: Directory
+    type: File
     outputBinding:
-      glob: output
+      glob: results.json
 
