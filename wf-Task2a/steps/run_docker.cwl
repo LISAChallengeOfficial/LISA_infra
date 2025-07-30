@@ -60,6 +60,7 @@ requirements:
 
 outputs:
   predictions:
-    type: File
+    type: File[]
     outputBinding:
-      glob: predictions.csv
+      glob: "output/*.nii*"
+
