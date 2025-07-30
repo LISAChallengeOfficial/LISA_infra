@@ -200,15 +200,17 @@ def main(syn, args):
     remove_docker_image(docker_image)
 
     output_folder = os.listdir(output_dir)
-    if not output_folder:
-        raise Exception("No 'predictions.csv' file written to /output, "
-                        "please check inference docker")
-    elif "predictions.csv" not in output_folder:
-        raise Exception("No 'predictions.csv' file written to /output, "
-                        "please check inference docker")
     # CWL has a limit of the array of files it can accept in a folder
     # therefore creating a tarball is sometimes necessary
     # tar(output_dir, 'outputs.tar.gz')
+
+    output_results = {"predictions": []}
+    for f in os.listdir(output_dir):
+        if f.endswith(".nii") or f.endswith(".nii.gz"):
+            output_results["predictions"].append(f)
+    with open("results.json", "w") as f:
+        json.dump(output_results, f)
+
 
 
 if __name__ == '__main__':
