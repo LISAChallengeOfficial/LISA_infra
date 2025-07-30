@@ -180,7 +180,8 @@ steps:
           class: File
           location: "run_docker.py"
     out:
-      - id: predictions
+      - predictions_dir   
+      - predictions
 
   upload_results:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/upload_to_synapse.cwl
