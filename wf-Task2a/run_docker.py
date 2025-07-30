@@ -162,7 +162,7 @@ def main(syn, args):
                                               detach=True, volumes=volumes,
                                               name=args.submissionid,
                                               network_disabled=True,
-                                              mem_limit='6g', stderr=True)
+                                              mem_limit='6g', stderr=True, runtime="nvidia")
         except docker.errors.APIError as err:
             remove_docker_container(args.submissionid)
             errors = str(err) + "\n"
