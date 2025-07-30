@@ -31,7 +31,7 @@ inputs:
   - id: synapse_config
     type: File
   - id: results
-    type: File
+    type: Folder
   - id: private_annotations
     type: string[]?
 
@@ -77,6 +77,8 @@ requirements:
             name = syn.getUserProfile(participantid)['userName']
           evaluation = syn.getEvaluation(sub.evaluationId)
 
+
+          args.results
           
           with open(args.results) as json_data:
             annots = json.load(json_data)
