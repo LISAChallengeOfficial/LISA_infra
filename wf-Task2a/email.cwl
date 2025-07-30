@@ -31,7 +31,7 @@ inputs:
   - id: synapse_config
     type: File
   - id: results
-    type: Folder
+    type: Directory
   - id: private_annotations
     type: string[]?
 
@@ -58,6 +58,7 @@ requirements:
           import argparse
           import json
           import os
+          import glob
           parser = argparse.ArgumentParser()
           parser.add_argument("-s", "--submissionid", required=True, help="Submission ID")
           parser.add_argument("-c", "--synapse_config", required=True, help="credentials file")
@@ -78,27 +79,22 @@ requirements:
           evaluation = syn.getEvaluation(sub.evaluationId)
 
 
-          args.results
-          
-          with open(args.results) as json_data:
-            annots = json.load(json_data)
-          if annots.get('submission_status') is None:
-            raise Exception("score.cwl must return submission_status as a json key")
-          status = annots['submission_status']
-          if status == "SCORED":
-              del annots['submission_status']
-              subject = "Submission to '%s' scored!" % evaluation.name
-              for annot in args.private_annotations:
-                del annots[annot]
-              if len(annots) == 0:
-                  message = "Your submission has been scored. Results will be announced at a later time."
-              else:
-                  message = ["Hello %s,\n\n" % name,
-                             "Your submission (id: %s) is scored, below are your results:\n\n" % sub.id,
-                             "\n".join([i + " : " + str(annots[i]) for i in annots]),
-                             "\n\nSincerely,\nChallenge Administrator"]
+          nii_files = glob.glob(os.path.join(args.results, "*.nii.gz"))
+          num_files = len(nii_files)
+          if num_files == 9:
+            subject = f"Submission to '{evaluation.name}' received!"
+            message = [f"Hello {name},\n\n",
+                      f"Your submission (id: {sub.id}) was successfully received and contains 9 .nii.gz files as expected.",
+                      "\n\nThank you for your participation!",
+                      "\n\nSincerely,\nChallenge Administrator"]
+          else:
+            subject = f"Issue with your submission to '{evaluation.name}'"
+            message = [f"Hello {name},\n\n",
+                      f"Your submission (id: {sub.id}) contains {num_files} .nii.gz file(s), but we expected exactly 9.",
+                      "\n\nPlease double-check your submission and re-upload it if needed.",
+                      "\n\nSincerely,\nChallenge Administrator"]
 
-              syn.sendMessage(
+          syn.sendMessage(
                   userIds=[participantid],
                   messageSubject=subject,
                   messageBody="".join(message))
