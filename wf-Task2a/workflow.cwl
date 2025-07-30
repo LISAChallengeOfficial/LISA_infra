@@ -216,60 +216,6 @@ steps:
         source: "#annotate_docker_validation_with_output/finished"
     out: [finished]
 
-  validate:
-    run: steps/validate.cwl
-    in:
-      - id: input_file
-        source: "#run_docker/predictions"
-      - id: entity_type
-        source: "#get_docker_submission/entity_type"
-    out:
-      - id: found_files
-
-  
-  email_validation:
-    run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/validate_email.cwl
-    in:
-      - id: submissionid
-        source: "#submissionId"
-      - id: synapse_config
-        source: "#synapseConfig"
-      - id: status
-        source: "#validate/status"
-      - id: invalid_reasons
-        source: "#validate/invalid_reasons"
-      # OPTIONAL: set `default` to `false` if email notification about valid submission is needed
-      - id: errors_only
-        default: true
-    out: [finished]
-
-  annotate_validation_with_output:
-    run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/annotate_submission.cwl
-    in:
-      - id: submissionid
-        source: "#submissionId"
-      - id: annotation_values
-        source: "#validate/results"
-      - id: to_public
-        default: true
-      - id: force
-        default: true
-      - id: synapse_config
-        source: "#synapseConfig"
-      - id: previous_annotation_finished
-        source: "#annotate_docker_upload_results/finished"
-    out: [finished]
-
-  check_status:
-    run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/check_status.cwl
-    in:
-      - id: status
-        source: "#validate/status"
-      - id: previous_annotation_finished
-        source: "#annotate_validation_with_output/finished"
-      - id: previous_email_finished
-        source: "#email_validation/finished"
-    out: [finished]
 
       
   email_score:
