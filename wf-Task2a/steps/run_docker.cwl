@@ -59,14 +59,13 @@ requirements:
   - class: InlineJavascriptRequirement
 
 outputs:
+  results_json:
+    type: File
+    outputBinding:
+      glob: output/results.json
   predictions_dir:
     type: Directory
     outputBinding:
       glob: output
-
-  predictions:
-    type: File
-    outputBinding:
-      glob: output/results.json
 
 
