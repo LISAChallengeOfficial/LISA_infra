@@ -60,7 +60,7 @@ requirements:
 
 outputs:
   predictions:
-    type: File[]
+    type: Directory
     outputBinding:
-      glob: "output/*.nii*"
+      glob: output
 
