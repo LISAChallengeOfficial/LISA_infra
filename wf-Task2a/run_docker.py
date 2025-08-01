@@ -114,7 +114,7 @@ def main(syn, args):
     )
     authen = dict(config.items("authentication"))
     client.login(username=authen['username'],
-                 password=authen['password'],
+                 password=authen['authtoken'],
                  registry="https://docker.synapse.org")
                  # dockercfg_path=".docker/config.json")
 
