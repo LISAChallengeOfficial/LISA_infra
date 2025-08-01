@@ -162,9 +162,9 @@ def main(syn, args):
     # volumes to be + permissions in docker (ro, rw)
     # It has to be in this format '/output:rw'
     mounted_volumes = {output_dir: '/output:rw',
-                       unzipped_input_dir: '/input:ro'}
+                       str(unzipped_input_dir): '/input:ro'}
     # All mounted volumes here in a list
-    all_volumes = [output_dir, unzipped_input_dir]
+    all_volumes = [output_dir, str(unzipped_input_dir)]
     # Mount volumes
     volumes = {}
     for vol in all_volumes:
