@@ -5,7 +5,8 @@ import getpass
 import os
 import tarfile
 import time
-
+import zipfile
+from pathlib import Path
 import docker
 import synapseclient
 
@@ -100,6 +101,17 @@ def untar(directory, tar_filename):
         tar_o.extractall(path=directory)
 
 
+
+def unzip(directory, zip_filename):
+    """Unzip a zip file into a directory
+
+    Args:
+        directory: Path to directory to unzip files
+        zip_filename: zip file path
+    """
+    with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
+        zip_ref.extractall(path=directory)
+
 def main(syn, args):
     """Run docker model"""
     if args.status == "INVALID":
@@ -127,13 +139,15 @@ def main(syn, args):
     #output_dir = os.path.join(os.getcwd(), "output")
     output_dir = os.getcwd()
     input_dir = args.input_dir
-
+    
+    unzip('/input', args.input_dir)
+    
     print("mounting volumes")
     # These are the locations on the docker that you want your mounted
     # volumes to be + permissions in docker (ro, rw)
     # It has to be in this format '/output:rw'
     mounted_volumes = {output_dir: '/output:rw',
-                       input_dir: '/input:ro'}
+                       '/input': '/input:ro'}
     # All mounted volumes here in a list
     all_volumes = [output_dir, input_dir]
     # Mount volumes
