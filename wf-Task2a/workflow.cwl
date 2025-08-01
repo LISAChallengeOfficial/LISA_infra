@@ -125,7 +125,6 @@ steps:
           location: "run_docker.py"
     out:
       - results_json
-      - predictions_dir
 
   upload_results:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/upload_to_synapse.cwl
