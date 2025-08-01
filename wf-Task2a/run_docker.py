@@ -144,14 +144,15 @@ def main(syn, args):
     #output_dir = os.path.join(os.getcwd(), "output")
     output_dir = os.getcwd()
     input_dir = args.input_dir
-    unzipped_input_dir = "/input"
+    unzipped_input_dir = os.path.join(os.getcwd(), "input")
+    os.makedirs(unzipped_input_dir, exist_ok=True)
     unzip(unzipped_input_dir, input_dir)
         
-    unzipped_input_dir = Path("/input")
-    nii_files = list(unzipped_input_dir.rglob("*.nii")) + list(unzipped_input_dir.rglob("*.nii.gz"))
+    unzipped_input = Path(unzipped_input_dir)
+    nii_files = list(unzipped_input.rglob("*.nii")) + list(unzipped_input.rglob("*.nii.gz"))
 
     if not nii_files:
-            raise FileNotFoundError(f"No .nii or .nii.gz files found in {unzipped_input_dir}")
+            raise FileNotFoundError(f"No .nii or .nii.gz files found in {unzipped_input}")
     else:
             print(f"Found {len(nii_files)} nii file(s):")
             
@@ -162,9 +163,9 @@ def main(syn, args):
     # volumes to be + permissions in docker (ro, rw)
     # It has to be in this format '/output:rw'
     mounted_volumes = {output_dir: '/output:rw',
-                       str(unzipped_input_dir): '/input:ro'}
+                       unzipped_input_dir: '/input:ro'}
     # All mounted volumes here in a list
-    all_volumes = [output_dir, str(unzipped_input_dir)]
+    all_volumes = [output_dir, unzipped_input_dir]
     # Mount volumes
     volumes = {}
     for vol in all_volumes:
