@@ -146,7 +146,8 @@ def main(syn, args):
     input_dir = args.input_dir
     unzipped_input_dir = "/input"
     unzip(unzipped_input_dir, input_dir)
-
+        
+    unzipped_input_dir = Path("/input")
     nii_files = list(unzipped_input_dir.rglob("*.nii")) + list(unzipped_input_dir.rglob("*.nii.gz"))
 
     if not nii_files:
