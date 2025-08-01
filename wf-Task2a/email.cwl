@@ -78,9 +78,13 @@ requirements:
             name = syn.getUserProfile(participantid)['userName']
           evaluation = syn.getEvaluation(sub.evaluationId)
 
-
-          nii_files = glob.glob(os.path.join(args.results, "*.nii.gz"))
+          with open(args.results, "r") as f:
+              data = json.load(f)
+          nii_files = data.get("predictions", [])
           num_files = len(nii_files)
+          
+          #nii_files = glob.glob(os.path.join(args.results, "*.nii.gz"))
+          #num_files = len(nii_files)
           if num_files == 9:
             subject = f"Submission to '{evaluation.name}' received!"
             message = [f"Hello {name},\n\n",
