@@ -142,6 +142,7 @@ def main(syn, args):
 
     # These are the volumes that you want to mount onto your docker container
     output_dir = os.path.join(os.getcwd(), "output")
+    os.makedirs(output_dir, exist_ok=True)
     #output_dir = os.getcwd()
     input_dir = args.input_dir
     unzipped_input_dir = os.path.join(os.getcwd(), "input")
@@ -238,7 +239,8 @@ def main(syn, args):
     for f in os.listdir(output_dir):
         if f.endswith(".nii") or f.endswith(".nii.gz"):
             output_results["predictions"].append(f)
-    with open("results.json", "w") as f:
+    results_json_path = os.path.join(output_dir, "results.json")
+    with open(results_json_path, "w") as f:
         json.dump(output_results, f)
 
 
