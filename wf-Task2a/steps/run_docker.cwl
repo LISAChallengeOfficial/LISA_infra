@@ -59,9 +59,6 @@ outputs:
     type: File
     outputBinding:
       glob: /output/results.json
-  predictions_dir:
-    type: Directory
-    outputBinding:
-      glob: /output
+
 
 
