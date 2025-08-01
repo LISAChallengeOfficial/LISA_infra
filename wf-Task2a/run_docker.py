@@ -229,7 +229,7 @@ if __name__ == '__main__':
                         help="to store logs")
     parser.add_argument("--parentid", required=True,
                         help="Parent Id of submitter directory")
-    parser.add_argument("--status", required=True, help="Docker image status")
+    #parser.add_argument("--status", required=True, help="Docker image status")
     args = parser.parse_args()
     syn = synapseclient.Synapse(configPath=args.synapse_config)
     syn.login()
