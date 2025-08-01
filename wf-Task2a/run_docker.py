@@ -11,7 +11,7 @@ import synapseclient
 from docker.types import DeviceRequest
 import zipfile
 from pathlib import Path
-
+import json
 
         
 device_requests = [
@@ -147,7 +147,15 @@ def main(syn, args):
     unzipped_input_dir = "/input"
     unzip(unzipped_input_dir, input_dir)
 
-        
+    nii_files = list(unzipped_input_dir.rglob("*.nii")) + list(unzipped_input_dir.rglob("*.nii.gz"))
+
+    if not nii_files:
+            raise FileNotFoundError(f"No .nii or .nii.gz files found in {unzipped_input_dir}")
+    else:
+            print(f"Found {len(nii_files)} nii file(s):")
+            
+    for f in nii_files:
+        print(f" - {f}")
     print("mounting volumes")
     # These are the locations on the docker that you want your mounted
     # volumes to be + permissions in docker (ro, rw)
