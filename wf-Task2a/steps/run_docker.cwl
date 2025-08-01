@@ -38,8 +38,6 @@ arguments:
     prefix: -d
   - valueFrom: $(inputs.store)
     prefix: --store
-  - valueFrom: $(inputs.status)
-    prefix: --status
   - valueFrom: $(inputs.parentid)
     prefix: --parentid
   - valueFrom: $(inputs.synapse_config.path)
