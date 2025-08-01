@@ -239,7 +239,7 @@ def main(syn, args):
     for f in os.listdir(output_dir):
         if f.endswith(".nii") or f.endswith(".nii.gz"):
             output_results["predictions"].append(f)
-                
+    print("output_results", output_results)      
     if not output_results["predictions"]:
         raise FileNotFoundError(f"No .nii or .nii.gz predictions found in {output_dir}")
 
