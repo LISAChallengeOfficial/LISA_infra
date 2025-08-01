@@ -31,7 +31,7 @@ inputs:
   - id: synapse_config
     type: File
   - id: results
-    type: Directory
+    type: File
   - id: private_annotations
     type: string[]?
 
