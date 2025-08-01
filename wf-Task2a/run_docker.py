@@ -239,6 +239,10 @@ def main(syn, args):
     for f in os.listdir(output_dir):
         if f.endswith(".nii") or f.endswith(".nii.gz"):
             output_results["predictions"].append(f)
+                
+    if not output_results["predictions"]:
+        raise FileNotFoundError(f"No .nii or .nii.gz predictions found in {output_dir}")
+
     results_json_path = os.path.join(output_dir, "results.json")
     with open(results_json_path, "w") as f:
         json.dump(output_results, f)
