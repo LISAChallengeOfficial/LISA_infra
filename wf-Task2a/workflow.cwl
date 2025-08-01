@@ -76,7 +76,7 @@ steps:
       - id: results
 
   get_docker_config:
-    run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/get_docker_config.cwl
+    run: steps/get_docker_config.cwl
     in:
       - id: synapse_config
         source: "#synapseConfig"
