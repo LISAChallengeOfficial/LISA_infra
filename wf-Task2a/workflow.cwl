@@ -2,7 +2,7 @@
 
 cwlVersion: v1.0
 class: Workflow
-label: <YOUR CHALLENGE> Evaluation
+label: LISA 2025 Task 2a
 doc: >
   BRIEF DESCRIPTION ABOUT THE CHALLENGE, e.g.
   This workflow will run and evaluate Docker submissions to the
@@ -146,7 +146,7 @@ steps:
 
       
   email_score:
-    run: email.cwl
+    run: steps/email.cwl
     in:
       - id: submissionid
         source: "#submissionId"
