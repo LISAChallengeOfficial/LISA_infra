@@ -102,8 +102,8 @@ def untar(directory, tar_filename):
 
 def main(syn, args):
     """Run docker model"""
-    if args.status == "INVALID":
-        raise Exception("Docker image is invalid")
+    #if args.status == "INVALID":
+    #    raise Exception("Docker image is invalid")
 
     # The new toil version doesn't seem to pull the docker config file from
     # .docker/config.json...
