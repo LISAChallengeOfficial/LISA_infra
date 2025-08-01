@@ -8,7 +8,11 @@ import time
 
 import docker
 import synapseclient
+from docker.types import DeviceRequest
 
+device_requests = [
+    DeviceRequest(count=-1, capabilities=[['gpu']])
+]
 
 def create_log_file(log_filename, log_text=None):
     """Create log file"""
@@ -162,7 +166,7 @@ def main(syn, args):
                                               detach=True, volumes=volumes,
                                               name=args.submissionid,
                                               network_disabled=True,
-                                              mem_limit='6g', stderr=True, runtime='nvidia')
+                                              mem_limit='6g', stderr=True, runtime='nvidia',device_requests=device_requests)
         except docker.errors.APIError as err:
             remove_docker_container(args.submissionid)
             errors = str(err) + "\n"
