@@ -22,7 +22,7 @@ inputs:
   - id: synapse_config
     type: File
   - id: input_dir
-    type: string
+    type: File
   - id: docker_script
     type: File
   - id: store
