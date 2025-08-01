@@ -144,15 +144,18 @@ def main(syn, args):
     #output_dir = os.path.join(os.getcwd(), "output")
     output_dir = os.getcwd()
     input_dir = args.input_dir
-    unzip('/input', input_dir)
+    unzipped_input_dir = "/input"
+    unzip(unzipped_input_dir, input_dir)
+
+        
     print("mounting volumes")
     # These are the locations on the docker that you want your mounted
     # volumes to be + permissions in docker (ro, rw)
     # It has to be in this format '/output:rw'
     mounted_volumes = {output_dir: '/output:rw',
-                       '/input': '/input:ro'}
+                       unzipped_input_dir: '/input:ro'}
     # All mounted volumes here in a list
-    all_volumes = [output_dir, input_dir]
+    all_volumes = [output_dir, unzipped_input_dir]
     # Mount volumes
     volumes = {}
     for vol in all_volumes:
