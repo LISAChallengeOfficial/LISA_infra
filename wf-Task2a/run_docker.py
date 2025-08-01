@@ -141,8 +141,8 @@ def main(syn, args):
     docker_image = args.docker_repository + "@" + args.docker_digest
 
     # These are the volumes that you want to mount onto your docker container
-    #output_dir = os.path.join(os.getcwd(), "output")
-    output_dir = os.getcwd()
+    output_dir = os.path.join(os.getcwd(), "output")
+    #output_dir = os.getcwd()
     input_dir = args.input_dir
     unzipped_input_dir = os.path.join(os.getcwd(), "input")
     os.makedirs(unzipped_input_dir, exist_ok=True)
