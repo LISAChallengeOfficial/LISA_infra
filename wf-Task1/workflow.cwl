@@ -130,7 +130,7 @@ steps:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/upload_to_synapse.cwl
     in:
       - id: infile
-        source: "#run_docker/results_json"
+        source: "#run_docker/results_csv"
       - id: parentid
         source: "#adminUploadSynId"
       - id: used_entity
