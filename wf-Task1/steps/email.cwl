@@ -88,7 +88,7 @@ requirements:
                       "\n\nSincerely,\nChallenge Administrator"]
           '''
 
-          if os.path.exists(args.results):
+          if os.path.exists(args.results) and "LISA_LF_QC_predictions.csv" in args.results:
             subject = f"Submission to '{evaluation.name}' received!"
             message = [
               f"Hello {name},\n\n",
