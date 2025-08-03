@@ -247,7 +247,7 @@ def main(syn, args):
     with open(results_json_path, "w") as f:
         json.dump(output_results, f)
     '''
-    if "LISA_LF_QC_predictions.csv" not in output_files:
+    if "LISA_LF_QC_predictions.csv" not in output_folder:
             raise FileNotFoundError("LISA_LF_QC_predictions.csv not found in output directory")
 
 
