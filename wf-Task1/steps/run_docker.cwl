@@ -55,7 +55,7 @@ requirements:
   - class: InlineJavascriptRequirement
 
 outputs:
-  results_json:
+  results_csv:
     type: File
     outputBinding:
       glob: output/LISA_LF_QC_predictions.csv
