@@ -92,7 +92,7 @@ requirements:
             subject = f"Submission to '{evaluation.name}' received!"
             message = [
               f"Hello {name},\n\n",
-              f"Your submission (id: {sub.id}) was successfully received and contains the expected file.",
+              f"Your submission (id: {sub.id}) was successfully received and generates the expected file.",
               "\n\nThank you for your participation!",
               "\n\nSincerely,\nChallenge Administrator"
             ]
