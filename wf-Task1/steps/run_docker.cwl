@@ -58,7 +58,7 @@ outputs:
   results_json:
     type: File
     outputBinding:
-      glob: output/results.json
+      glob: output/LISA_LF_QC_predictions.csv
 
 
 
