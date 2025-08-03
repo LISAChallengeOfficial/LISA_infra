@@ -124,7 +124,7 @@ steps:
           class: File
           location: "run_docker.py"
     out:
-      - results_json
+      - results_csv
 
   upload_results:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/upload_to_synapse.cwl
@@ -153,7 +153,7 @@ steps:
       - id: synapse_config
         source: "#synapseConfig"
       - id: results
-        source: "#run_docker/results_json"
+        source: "#run_docker/results_csv"
       # OPTIONAL: add annotations to be withheld from participants to `[]`
       # - id: private_annotations
       #   default: []
