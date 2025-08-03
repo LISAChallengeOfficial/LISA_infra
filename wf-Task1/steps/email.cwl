@@ -66,7 +66,7 @@ requirements:
             participantid = sub.userId
             name = syn.getUserProfile(participantid)['userName']
           evaluation = syn.getEvaluation(sub.evaluationId)
-
+          '''
           with open(args.results, "r") as f:
               data = json.load(f)
           nii_files = data.get("predictions", [])
@@ -86,6 +86,24 @@ requirements:
                       f"Your submission (id: {sub.id}) contains {num_files} .nii.gz file(s), but we expected exactly 9.",
                       "\n\nPlease double-check your submission and re-upload it if needed.",
                       "\n\nSincerely,\nChallenge Administrator"]
+          '''
+
+          if os.path.exists(args.results):
+            subject = f"Submission to '{evaluation.name}' received!"
+            message = [
+              f"Hello {name},\n\n",
+              f"Your submission (id: {sub.id}) was successfully received and contains the expected file.",
+              "\n\nThank you for your participation!",
+              "\n\nSincerely,\nChallenge Administrator"
+            ]
+          else:
+            subject = f"Issue with your submission to '{evaluation.name}'"
+            message = [
+            f"Hello {name},\n\n",
+            f"Your submission (id: {sub.id}) is missing the expected result file.",
+            "\n\nPlease double-check your submission and re-upload it if needed.",
+            "\n\nSincerely,\nChallenge Administrator"
+            ]
 
           syn.sendMessage(
                   userIds=[participantid],
