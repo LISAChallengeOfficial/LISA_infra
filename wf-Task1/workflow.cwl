@@ -126,6 +126,31 @@ steps:
     out:
       - results_csv
 
+  download_goldstandard:
+    doc: Download goldstandard
+    run: |-
+      https://raw.githubusercontent.com/Sage-Bionetworks-Workflows/cwl-tool-synapseclient/v1.4/cwl/synapse-get-tool.cwl
+    in:
+      - id: synapseid
+        valueFrom: "syn68584977"
+      - id: synapse_config
+        source: "#synapseConfig"
+    out:
+      - id: filepath 
+
+  score:
+    doc: Score submission
+    run: steps/score.cwl
+    in:
+      segs:
+        source: "#download_submission/filepath"
+      masks:
+        source: "#run_docker/results_csv"
+      output_name:
+        valueFrom: "results.json"
+    out:
+      - id: results
+
   upload_results:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/upload_to_synapse.cwl
     in:
@@ -145,19 +170,6 @@ steps:
       - id: results
 
       
-  email_score:
-    run: steps/email.cwl
-    in:
-      - id: submissionid
-        source: "#submissionId"
-      - id: synapse_config
-        source: "#synapseConfig"
-      - id: results
-        source: "#run_docker/results_csv"
-      # OPTIONAL: add annotations to be withheld from participants to `[]`
-      # - id: private_annotations
-      #   default: []
-    out: []
 
  
  
