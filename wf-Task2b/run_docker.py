@@ -235,6 +235,7 @@ def main(syn, args):
     # therefore creating a tarball is sometimes necessary
     # tar(output_dir, 'outputs.tar.gz')
 
+    '''
     output_results = {"predictions": []}
     for f in os.listdir(output_dir):
         if f.endswith(".nii") or f.endswith(".nii.gz"):
@@ -246,6 +247,24 @@ def main(syn, args):
     results_json_path = os.path.join(output_dir, "results.json")
     with open(results_json_path, "w") as f:
         json.dump(output_results, f)
+    '''
+    nii_files = sorted(
+    f for f in os.listdir(output_dir) if f.endswith(('.nii', '.nii.gz'))
+)
+
+    if not nii_files:
+      raise FileNotFoundError(f"No .nii or .nii.gz predictions found in {output_dir}")
+
+    zip_path = os.path.join(output_dir, "results.zip")
+
+    with zipfile.ZipFile(zip_path, mode="w", allowZip64=True) as zf:
+      for fname in nii_files:
+          full = os.path.join(output_dir, fname)
+
+          compress = zipfile.ZIP_STORED if fname.endswith(".nii.gz") else zipfile.ZIP_DEFLATED
+          zf.write(full, arcname=fname, compress_type=compress)
+
+    print(f"[OK] Packed {len(nii_files)} files into {zip_path}")
 
 
 
