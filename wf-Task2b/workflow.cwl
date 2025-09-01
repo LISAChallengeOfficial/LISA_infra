@@ -84,7 +84,7 @@ steps:
       - id: docker_registry
       - id: docker_authentication
 
-  download_goldstandard:
+  download_input:
     run: https://raw.githubusercontent.com/Sage-Bionetworks-Workflows/cwl-tool-synapseclient/v1.4/cwl/synapse-get-tool.cwl
     in:
       # TODO: replace `valueFrom` with the Synapse ID to the challenge goldstandard
@@ -118,19 +118,62 @@ steps:
         default: true
       # TODO: replace `valueFrom` with the absolute path to the data directory to be mounted
       - id: input_dir
-        source: "#download_goldstandard/filepath"
+        source: "#download_input/filepath"
       - id: docker_script
         default:
           class: File
           location: "run_docker.py"
     out:
-      - results_json
+      - results_zip
+
+  download_goldstandard:
+    doc: Download goldstandard
+    run: |-
+      https://raw.githubusercontent.com/Sage-Bionetworks-Workflows/cwl-tool-synapseclient/v1.4/cwl/synapse-get-tool.cwl
+    in:
+      - id: synapseid
+        valueFrom: "syn69088024"
+      - id: synapse_config
+        source: "#synapseConfig"
+    out:
+      - id: filepath 
+
+  score:
+    doc: Score submission
+    run: steps/score.cwl
+    in:
+      segs:
+        source: "#run_docker/results_zip"
+      masks:
+        source: "#download_goldstandard/filepath"
+      output_name:
+        valueFrom: "results.json"
+    out:
+      - id: results
+
+  add_score_annots:
+    doc: >
+      Update `submission_status` and add the scoring metric annotations
+    run: |-
+      https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v4.1/cwl/annotate_submission.cwl
+    in:
+      - id: submissionid
+        source: "#submissionId"
+      - id: annotation_values
+        source: "#score/results"
+      - id: to_public
+        default: true
+      - id: force
+        default: true
+      - id: synapse_config
+        source: "#synapseConfig"
+    out: [finished]
 
   upload_results:
     run: https://raw.githubusercontent.com/Sage-Bionetworks/ChallengeWorkflowTemplates/v3.1/cwl/upload_to_synapse.cwl
     in:
       - id: infile
-        source: "#run_docker/results_json"
+        source: "#score/results"
       - id: parentid
         source: "#adminUploadSynId"
       - id: used_entity
@@ -143,21 +186,5 @@ steps:
       - id: uploaded_fileid
       - id: uploaded_file_version
       - id: results
-
-      
-  email_score:
-    run: steps/email.cwl
-    in:
-      - id: submissionid
-        source: "#submissionId"
-      - id: synapse_config
-        source: "#synapseConfig"
-      - id: results
-        source: "#run_docker/results_json"
-      # OPTIONAL: add annotations to be withheld from participants to `[]`
-      # - id: private_annotations
-      #   default: []
-    out: []
-
  
  
