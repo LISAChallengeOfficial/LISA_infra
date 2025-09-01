@@ -55,10 +55,10 @@ requirements:
   - class: InlineJavascriptRequirement
 
 outputs:
-  results_json:
+  results_zip:
     type: File
     outputBinding:
-      glob: output/results.json
+      glob: output/results.zip
 
 
 
