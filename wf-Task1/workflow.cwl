@@ -143,9 +143,9 @@ steps:
     run: steps/score.cwl
     in:
       segs:
-        source: "#download_submission/filepath"
-      masks:
         source: "#run_docker/results_csv"
+      masks:
+        source: "#download_goldstandard/filepath"
       output_name:
         valueFrom: "results.json"
     out:
