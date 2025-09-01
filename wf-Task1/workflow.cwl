@@ -84,7 +84,7 @@ steps:
       - id: docker_registry
       - id: docker_authentication
 
-  download_goldstandard:
+  download_input:
     run: https://raw.githubusercontent.com/Sage-Bionetworks-Workflows/cwl-tool-synapseclient/v1.4/cwl/synapse-get-tool.cwl
     in:
       # TODO: replace `valueFrom` with the Synapse ID to the challenge goldstandard
@@ -118,7 +118,7 @@ steps:
         default: true
       # TODO: replace `valueFrom` with the absolute path to the data directory to be mounted
       - id: input_dir
-        source: "#download_goldstandard/filepath"
+        source: "#download_input/filepath"
       - id: docker_script
         default:
           class: File
