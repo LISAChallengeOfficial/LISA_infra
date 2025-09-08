@@ -75,7 +75,7 @@ requirements:
           #nii_files = glob.glob(os.path.join(args.results, "*.nii.gz"))
           #num_files = len(nii_files)
           if num_files == 9:
-            subject = f"Submission to '{evaluation.name}' received!"
+            subject = f"Submission to '{evaluation.name}' accepted!"
             message = [f"Hello {name},\n\n",
                       f"Your submission (id: {sub.id}) was successfully received and contains 9 .nii.gz files as expected.",
                       "\n\nThank you for your participation!",
